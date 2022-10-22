@@ -13,7 +13,9 @@ playerTwoContainer.style.display = "none";
 let printWrongResult = document.querySelector("#wrong-result");
 let printCorrectResult = document.querySelector("#correct-result");
 
+// Lives left
 let showLivesLeft = document.querySelector("#lives-left");
+let showLivesLeftVictory = document.querySelector("#lives-left-victory");
 
 //restart
 let restartButton = document.querySelector("#restart-button");
@@ -51,6 +53,10 @@ function playerTwoGuess() {
     playerTwoContainer.style.display = "none";
     showLivesLeft.style.display = "none";
     restartButton.style.display = "block";
+    if (lives === 3) {
+      showLivesLeftVictory.innerHTML =
+        "Snyggt! Du gissade rätt nummer på första försöket.";
+    }
     restartButton.addEventListener("click", () => {
       location.reload();
     });
@@ -70,6 +76,7 @@ function playerTwoGuess() {
   if (lives < 1) {
     playerTwoContainer.style.display = "none";
     printWrongResult.innerHTML = "Spelet slut!";
+    showLivesLeftVictory.innerHTML = `Rätt svar var nummer ${answer}.`;
     restartButton.style.display = "block";
     restartButton.addEventListener("click", () => {
       location.reload();
