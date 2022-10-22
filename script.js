@@ -41,20 +41,20 @@ function playerTwoGuess() {
   guess = parseInt(playerTwoInput.value);
   playerTwoInput.value = "";
   if (guess === answer) {
-    printCorrectResult.innerHTML = `Grattis! ${answer} är rätt svar`;
+    printCorrectResult.innerHTML = `Grattis! ${answer} är rätt svar.`;
     printWrongResult.innerHTML = "";
     restartButton.style.display = "block";
     restartButton.addEventListener("click", () => {
       location.reload();
     });
-  } else if (guess > answer && guess < 10) {
-    printWrongResult.innerHTML = `Nummer ${guess} för högt. försök igen!`;
+  } else if (guess > answer && guess < 11) {
+    printWrongResult.innerHTML = `Nummer ${guess} är för högt. försök igen!`;
   } else if (guess === 0 || guess > 10) {
     printWrongResult.innerHTML = "Vänligen fyll i ett nummer mellan 1 - 10!";
   } else if (guess > 10) {
     printWrongResult.innerHTML = "Vänligen fyll i ett nummer mellan 1 - 10!";
   } else {
-    printWrongResult.innerHTML = `Nummer ${guess} för lågt. försök igen!`;
+    printWrongResult.innerHTML = `Nummer ${guess} är för lågt. försök igen!`;
   }
 }
 
