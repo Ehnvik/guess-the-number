@@ -13,6 +13,8 @@ playerTwoContainer.style.display = "none";
 let printWrongResult = document.querySelector("#wrong-result");
 let printCorrectResult = document.querySelector("#correct-result");
 
+let showLivesLeft = document.querySelector("#lives-left");
+
 //restart
 let restartButton = document.querySelector("#restart-button");
 restartButton.style.display = "none";
@@ -22,14 +24,13 @@ answer = 0;
 function playerOneAnswer() {
   answer = parseInt(playerOneInput.value);
 
-  if (answer === 0) {
-    printWrongResult.innerHTML = "Vänligen fyll i ett nummer mellan 1 - 10!";
-  } else if (answer > 10) {
+  if (answer === 0 || answer > 10) {
     printWrongResult.innerHTML = "Vänligen fyll i ett nummer mellan 1 - 10!";
   } else {
     printWrongResult.innerHTML = "";
     playerOneContainer.style.display = "none";
     playerTwoContainer.style.display = "block";
+    alert(`Du har valt nummber: ${answer}`);
   }
 
   playerOneInput.value = "";
@@ -37,12 +38,18 @@ function playerOneAnswer() {
 
 playerOneButton.addEventListener("click", playerOneAnswer);
 
+lives = 3;
+
 function playerTwoGuess() {
   guess = parseInt(playerTwoInput.value);
   playerTwoInput.value = "";
+  console.log(lives);
+
   if (guess === answer) {
     printCorrectResult.innerHTML = `Grattis! ${answer} är rätt svar.`;
     printWrongResult.innerHTML = "";
+    playerTwoContainer.style.display = "none";
+    showLivesLeft.style.display = "none";
     restartButton.style.display = "block";
     restartButton.addEventListener("click", () => {
       location.reload();
@@ -55,6 +62,18 @@ function playerTwoGuess() {
     printWrongResult.innerHTML = "Vänligen fyll i ett nummer mellan 1 - 10!";
   } else {
     printWrongResult.innerHTML = `Nummer ${guess} är för lågt. försök igen!`;
+  }
+  if (guess !== answer) {
+    --lives;
+    showLivesLeft.innerHTML = `Du har ${lives} försök kvar.`;
+  }
+  if (lives < 1) {
+    playerTwoContainer.style.display = "none";
+    printWrongResult.innerHTML = "Spelet slut!";
+    restartButton.style.display = "block";
+    restartButton.addEventListener("click", () => {
+      location.reload();
+    });
   }
 }
 

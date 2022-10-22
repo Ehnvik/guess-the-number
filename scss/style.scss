@@ -19,15 +19,27 @@ body {
   }
   #wrong-result {
     color: red;
+    font-size: xx-large;
   }
   #correct-result {
     color: green;
+    font-size: xx-large;
   }
   .button__container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     cursor: pointer;
+    .restart-button {
+      width: 80px;
+      height: 40px;
+      font-weight: 600;
+      background-color: lightgreen;
+      border: 1px solid;
+      &:hover {
+        background-color: rgba(144, 238, 144, 0.5);
+      }
+    }
   }
   button {
     cursor: pointer;
